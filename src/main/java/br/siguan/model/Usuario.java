@@ -1,7 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,12 +14,9 @@ import javax.validation.constraints.NotNull;
 
 import br.siguan.model.enuns.TipoUsuario;
 
-@Entity
-@Table(name = "Usuario")
-public class Usuario extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "usuario")
+@Table
+public class Usuario extends AbstractModel<Integer> {
 	@Id
     @Column(name = "idUsuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +41,6 @@ public class Usuario extends AbstractModel<Integer> implements Serializable {
     String email;
 
     public Usuario() {
-
     }
 
     public Usuario( String nome, String imagem, TipoUsuario tipo, String email) {

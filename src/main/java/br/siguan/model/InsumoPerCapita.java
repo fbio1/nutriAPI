@@ -1,7 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,12 +12,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-@Entity
-@Table(name = "InsumosPerCapta")
-public class InsumoPerCapita extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "insumosPerCapta")
+@Table
+public class InsumoPerCapita extends AbstractModel<Integer> {
 	@Id
 	@Column(name = "idInsumoPerCapta")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

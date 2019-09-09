@@ -1,6 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +21,9 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@Entity
-@Table(name = "Cardapios")
-public class Cardapio extends AbstractModel<Integer> implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "Cardapios")
+@Table
+public class Cardapio extends AbstractModel<Integer> {
 	@Id
     @Column(name = "idCardapio")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,7 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,16 +18,9 @@ import org.hibernate.annotations.Cascade;
 import br.siguan.model.enuns.PerguntaSecreta;
 import br.siguan.token.Token;
 
-/**
- * @author Lucas
- */
-
-@Entity
-@Table(name = "Login")
-public class Login extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "login")
+@Table
+public class Login extends AbstractModel<Integer> {
 	@Id
 	@Column(name = "idLogin")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,43 +35,43 @@ public class Login extends AbstractModel<Integer> implements Serializable {
 	@Size(min = 8, message = "A senha deve conter no mínimo 8 dígitos")
 	private String senha;
 
-	@Column(name = "pergunta", nullable = false)
-	@Enumerated(EnumType.STRING)
-	@NotNull(message = "Por favor, informe a pergunta secreta!")
-	private PerguntaSecreta pergunta;
-
-	@Column(name = "resposta", nullable = false)
-	@NotEmpty(message = "Por favor, insira a resposta da pergunta secreta!")
-	private String resposta;
-
-	@Column
-	private String token;
-
-	@Column
-	private int alteracoes;
+//	@Column(name = "pergunta", nullable = false)
+//	@Enumerated(EnumType.STRING)
+//	@NotNull(message = "Por favor, informe a pergunta secreta!")
+//	private PerguntaSecreta pergunta;
+//
+//	@Column(name = "resposta", nullable = false)
+//	@NotEmpty(message = "Por favor, insira a resposta da pergunta secreta!")
+//	private String resposta;
+//
+//	@Column
+//	private String token;
+//
+//	@Column
+//	private int alteracoes;
 
 	@OneToOne
-	@Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
 	private Usuario usuario;
-
-	public Login(String login, String senha, PerguntaSecreta pergunta, String resposta, Usuario usuario) {
-		this.login = login;
-		this.senha = senha;
-		this.pergunta = pergunta;
-		this.resposta = resposta;
-		this.usuario = usuario;
-	}
+	
+//	public Login(String login, String senha, PerguntaSecreta pergunta, String resposta, Usuario usuario) {
+//		this.login = login;
+//		this.senha = senha;
+//		this.pergunta = pergunta;
+//		this.resposta = resposta;
+//		this.usuario = usuario;
+//	}
 
 	public Login() {
 	}
 
-	public void login() {
-		setToken(Token.criarToken(id, usuario.getTipo()));
-	}
-
-	public void logout() {
-		setToken(null);
-	}
+//	public void login() {
+//		setToken(Token.criarToken(id, usuario.getTipo()));
+//	}
+//
+//	public void logout() {
+//		setToken(null);
+//	}
 
 	public Integer getId() {
 		return id;
@@ -106,37 +97,37 @@ public class Login extends AbstractModel<Integer> implements Serializable {
 		this.senha = senha;
 	}
 
-	public PerguntaSecreta getPergunta() {
-		return pergunta;
-	}
-
-	public void setPergunta(PerguntaSecreta pergunta) {
-		this.pergunta = pergunta;
-	}
-
-	public String getResposta() {
-		return resposta;
-	}
-
-	public void setResposta(String resposta) {
-		this.resposta = resposta;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public int getAlteracoes() {
-		return alteracoes;
-	}
-
-	public void setAlteracoes(int alteracoes) {
-		this.alteracoes = alteracoes;
-	}
+//	public PerguntaSecreta getPergunta() {
+//		return pergunta;
+//	}
+//
+//	public void setPergunta(PerguntaSecreta pergunta) {
+//		this.pergunta = pergunta;
+//	}
+//
+//	public String getResposta() {
+//		return resposta;
+//	}
+//
+//	public void setResposta(String resposta) {
+//		this.resposta = resposta;
+//	}
+//
+//	public String getToken() {
+//		return token;
+//	}
+//
+//	public void setToken(String token) {
+//		this.token = token;
+//	}
+//
+//	public int getAlteracoes() {
+//		return alteracoes;
+//	}
+//
+//	public void setAlteracoes(int alteracoes) {
+//		this.alteracoes = alteracoes;
+//	}
 
 	public Usuario getUsuario() {
 		return usuario;

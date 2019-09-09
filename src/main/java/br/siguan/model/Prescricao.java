@@ -1,7 +1,6 @@
 package br.siguan.model;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,12 +23,9 @@ import org.hibernate.annotations.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
-@Table(name = "Prescricoes")
-public class Prescricao extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "prescricoes")
+@Table
+public class Prescricao extends AbstractModel<Integer> {
 	@Id
     @Column(name = "idPrescricao")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,12 +19,9 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-@Entity
-@Table(name = "CardapiosAplicados")
-public class CardapioAplicado extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "cardapiosAplicados")
+@Table
+public class CardapioAplicado extends AbstractModel<Integer> {
 	@Id
 	@Column(name = "idCardapioAplicado")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

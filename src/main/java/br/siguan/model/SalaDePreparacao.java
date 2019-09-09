@@ -1,7 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "SalaDePreparacao")
-public class SalaDePreparacao extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+public class SalaDePreparacao extends AbstractModel<Integer> {
 	@Id
 	@Column(name = "idSalaDePreparacao")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

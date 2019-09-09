@@ -1,6 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,12 +16,9 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
-@Table(name = "ItensEstoques")
-public class ItemEstoque extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "itensEstoques")
+@Table
+public class ItemEstoque extends AbstractModel<Integer> {
 	@Id
     @Column(name = "idItemEstoque")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,9 +1,7 @@
 package br.siguan.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,12 +32,9 @@ import br.siguan.model.enuns.Sodio;
 import br.siguan.model.enuns.TecnicasCoccao;
 import br.siguan.model.enuns.TipoTextura;
 
-@Entity
-@Table(name = "Preparacoes")
-public class Preparacao extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 3373722067026901764L;
-
+@Entity(name = "preparacoes")
+@Table
+public class Preparacao extends AbstractModel<Integer> {
 	@Id
 	@Column(name = "idPreparacao")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

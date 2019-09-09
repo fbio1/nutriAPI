@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.siguan.helper.PasswordUtils;
 import br.siguan.helper.Response;
+import br.siguan.model.Login;
 import br.siguan.model.Usuario;
+import br.siguan.model.dto.CadastroUsuarioDTO;
+import br.siguan.repository.LoginRepository;
 import br.siguan.repository.UsuarioRepository;
 
 @RestController
@@ -29,30 +33,78 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private LoginRepository loginRepository;
 
 	@GetMapping
 	public List<Usuario> listarClientes() {
 		List<Usuario> usuarios = this.usuarioRepository.findAll();
 		return usuarios;
 	}
-
+	
+	//@PreAuthorize("hasAnyRole('ADMINISTRADOR','BOLSISTA')")
 	@PostMapping
-	public ResponseEntity<Response<Usuario>> cadastrarCliente(
-			@Valid @RequestBody Usuario usuario, BindingResult result) throws NoSuchAlgorithmException {
+	public ResponseEntity<Response<CadastroUsuarioDTO>> cadastrarCliente(
+			@Valid @RequestBody CadastroUsuarioDTO usuarioDto, BindingResult result) throws NoSuchAlgorithmException {
 
-		Response<Usuario> response = new Response<Usuario>();
+		Response<CadastroUsuarioDTO> response = new Response<CadastroUsuarioDTO>();
 
-		//validarDadosExistentes(usuario, result);
+		//validarDadosExistentes(usuarioDto, result);
 
-		if (result.hasErrors()) {			
-			result.getAllErrors().forEach(error -> response.getErros().add(error.getDefaultMessage()));
+		Usuario user = this.converterDtoParaUsuario(usuarioDto);
+
+		Login login = this.converterDtoParaLogin(usuarioDto, result);
+
+		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body(response);
 		}
-		
-		//usuario.setSenha(PasswordUtils.gerarBCrypt(usuario.getSenha()));		
-		response.setData(this.usuarioRepository.save(usuario));
+
+//		this.usuarioRepository.save(user);
+		login.setUsuario(user);
+		this.loginRepository.save(login);
+		response.setData(this.converterCadastroDTO(login));
 		
 		return ResponseEntity.ok(response);
+	}
+	
+//	private void validarDadosExistentes(CadastroUsuarioDTO usuarioDTO, BindingResult result) {
+//
+//		Login login = this.loginRepository.findByloginAndAtivoTrue(usuarioDTO.getLogin());
+//		
+//	}
+	
+	private Usuario converterDtoParaUsuario(CadastroUsuarioDTO usuarioDTO) {
+
+		Usuario user = new Usuario();
+		user.setEmail(usuarioDTO.getEmail());
+		user.setNome(usuarioDTO.getNome());
+		user.setTipo(usuarioDTO.getTipo());
+		user.setImagem(usuarioDTO.getImagem());
+
+		return (Usuario) user;
+	}
+
+	private Login converterDtoParaLogin(CadastroUsuarioDTO usuarioDTO, BindingResult result)
+			throws NoSuchAlgorithmException {
+
+		Login login = new Login();
+		login.setLogin(usuarioDTO.getLogin());
+		login.setSenha(usuarioDTO.getSenha());
+//		login.setSenha(PasswordUtils.gerarBCrypt(usuarioDTO.getSenha()));
+		return login;
+	}
+	
+	private CadastroUsuarioDTO converterCadastroDTO(Login credencial) {
+		CadastroUsuarioDTO usuarioDTO = new CadastroUsuarioDTO();
+
+		usuarioDTO.setId(credencial.getId());
+		usuarioDTO.setLogin(credencial.getLogin());
+		usuarioDTO.setNome(credencial.getUsuario().getNome());
+		usuarioDTO.setEmail(credencial.getUsuario().getEmail());
+		usuarioDTO.setTipo(credencial.getUsuario().getTipo());
+		usuarioDTO.setImagem(credencial.getUsuario().getImagem());
+		return usuarioDTO;
 	}
 
 	@GetMapping(value = "{id}")

@@ -1,7 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,10 +15,7 @@ import br.siguan.model.enuns.UnidadeBase;
 
 @Entity
 @Table(name = "Unidades")
-public class Unidade extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+public class Unidade extends AbstractModel<Integer> {
 	@Id
     @Column(name = "idUnidade")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

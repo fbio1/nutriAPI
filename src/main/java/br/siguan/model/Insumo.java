@@ -1,7 +1,5 @@
 package br.siguan.model;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +16,9 @@ import javax.validation.constraints.NotNull;
 import br.siguan.model.enuns.TipoInsumo;
 import br.siguan.model.enuns.UnidadeBase;
 
-@Entity
-@Table(name = "Insumos")
-public class Insumo extends AbstractModel<Integer> implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+@Entity(name = "insumos")
+@Table
+public class Insumo extends AbstractModel<Integer> {
 	@Id
 	@Column(name = "idInsumo")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
