@@ -23,11 +23,11 @@ import org.hibernate.annotations.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name = "prescricoes")
-@Table
+@Entity
+@Table(name = "prescricao")
 public class Prescricao extends AbstractModel<Integer> {
 	@Id
-    @Column(name = "idPrescricao")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -48,7 +48,7 @@ public class Prescricao extends AbstractModel<Integer> {
     @JoinTable(name = "prescricao_itensDesjejum",
             joinColumns = {
                 @JoinColumn(name = "FK_Prescricao",
-                        referencedColumnName = "idPrescricao")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_ItemEstoque")})
     @Cascade({org.hibernate.annotations.CascadeType.REPLICATE})
@@ -58,7 +58,7 @@ public class Prescricao extends AbstractModel<Integer> {
     @JoinTable(name = "prescricao_itensLancheManha",
             joinColumns = {
                 @JoinColumn(name = "FK_Prescricao",
-                        referencedColumnName = "idPrescricao")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_ItemEstoque")})
     @Cascade({org.hibernate.annotations.CascadeType.REPLICATE})
@@ -68,7 +68,7 @@ public class Prescricao extends AbstractModel<Integer> {
     @JoinTable(name = "prescricao_itensAlmoco",
             joinColumns = {
                 @JoinColumn(name = "FK_Prescricao",
-                        referencedColumnName = "idPrescricao")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_ItemEstoque")})
     @Cascade({org.hibernate.annotations.CascadeType.REPLICATE})
@@ -78,7 +78,7 @@ public class Prescricao extends AbstractModel<Integer> {
     @JoinTable(name = "prescricao_itensLancheTarde",
             joinColumns = {
                 @JoinColumn(name = "FK_Prescricao",
-                        referencedColumnName = "idPrescricao")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_ItemEstoque")})
     @Cascade({org.hibernate.annotations.CascadeType.REPLICATE})
@@ -88,7 +88,7 @@ public class Prescricao extends AbstractModel<Integer> {
     @JoinTable(name = "prescricao_itensJanta",
             joinColumns = {
                 @JoinColumn(name = "FK_Prescricao",
-                        referencedColumnName = "idPrescricao")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_ItemEstoque")})
     @Cascade({org.hibernate.annotations.CascadeType.REPLICATE})
@@ -98,7 +98,7 @@ public class Prescricao extends AbstractModel<Integer> {
     @JoinTable(name = "prescricao_itensCeia",
             joinColumns = {
                 @JoinColumn(name = "FK_Prescricao",
-                        referencedColumnName = "idPrescricao")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_ItemEstoque")})
     @Cascade({org.hibernate.annotations.CascadeType.REPLICATE})

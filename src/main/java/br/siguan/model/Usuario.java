@@ -14,11 +14,11 @@ import javax.validation.constraints.NotNull;
 
 import br.siguan.model.enuns.TipoUsuario;
 
-@Entity(name = "usuario")
-@Table
+@Entity
+@Table(name = "usuario")
 public class Usuario extends AbstractModel<Integer> {
 	@Id
-    @Column(name = "idUsuario")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

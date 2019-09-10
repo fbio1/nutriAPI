@@ -32,11 +32,11 @@ import br.siguan.model.enuns.Sodio;
 import br.siguan.model.enuns.TecnicasCoccao;
 import br.siguan.model.enuns.TipoTextura;
 
-@Entity(name = "preparacoes")
-@Table
+@Entity
+@Table(name = "preparacao")
 public class Preparacao extends AbstractModel<Integer> {
 	@Id
-	@Column(name = "idPreparacao")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -96,7 +96,7 @@ public class Preparacao extends AbstractModel<Integer> {
 	@Fetch(FetchMode.SUBSELECT)
 	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "preparacao_insumopercapita", joinColumns = {
-			@JoinColumn(name = "FK_idPreparacao", referencedColumnName = "idPreparacao") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_idPreparacao", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_idInsumoPerCapita") })
 	private List<InsumoPerCapita> listaIngredientes = new ArrayList<>();
 

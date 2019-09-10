@@ -5,7 +5,6 @@ package br.siguan.model;
  * @author Taniro
  */
 public class ConsultaItemEstoque {
-
 	private java.math.BigDecimal quantidadeTotal;
 	private Double multiplicador;
 	private String tipoUnidadeBase;

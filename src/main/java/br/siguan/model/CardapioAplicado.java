@@ -19,11 +19,11 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-@Entity(name = "cardapiosAplicados")
-@Table
+@Entity
+@Table(name = "cardapio_aplicado")
 public class CardapioAplicado extends AbstractModel<Integer> {
 	@Id
-	@Column(name = "idCardapioAplicado")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -33,7 +33,7 @@ public class CardapioAplicado extends AbstractModel<Integer> {
 
 	@OneToMany
 	@JoinTable(name = "cadapios_aplicados_menus_aplicados", joinColumns = {
-			@JoinColumn(name = "FK_cardapioAplicado", referencedColumnName = "idCardapioAplicado") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_cardapioAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_menuAplicado") })
 	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.REFRESH })
 	private List<MenuAplicado> menus = new ArrayList<>();

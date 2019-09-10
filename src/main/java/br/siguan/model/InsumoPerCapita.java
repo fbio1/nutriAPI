@@ -12,11 +12,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-@Entity(name = "insumosPerCapta")
-@Table
+@Entity
+@Table(name = "insumo_per_capta")
 public class InsumoPerCapita extends AbstractModel<Integer> {
 	@Id
-	@Column(name = "idInsumoPerCapta")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 

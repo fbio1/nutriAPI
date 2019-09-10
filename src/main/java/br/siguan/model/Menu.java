@@ -17,12 +17,12 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-@Entity(name = "menus")
-@Table
+@Entity
+@Table(name = "menu")
 public class Menu extends AbstractModel<Integer> {
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idMenu")
 	private Integer id;
 
 	@Column(nullable = false)
@@ -31,42 +31,42 @@ public class Menu extends AbstractModel<Integer> {
 
 	@ManyToMany
 	@JoinTable(name = "menu_preparacao_desjejum", joinColumns = {
-			@JoinColumn(name = "FK_id_menu", referencedColumnName = "idMenu") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_id_menu", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_id_preparacao") })
 	@Cascade({ CascadeType.REPLICATE })
 	private List<Preparacao> desjejum = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_preparacao_almoco", joinColumns = {
-			@JoinColumn(name = "FK_id_menu", referencedColumnName = "idMenu") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_id_menu", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_id_preparacao") })
 	@Cascade({ CascadeType.REPLICATE })
 	private List<Preparacao> almoco = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_preparacao_janta", joinColumns = {
-			@JoinColumn(name = "FK_id_menu", referencedColumnName = "idMenu") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_id_menu", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_id_preparacao") })
 	@Cascade({ CascadeType.REPLICATE })
 	private List<Preparacao> janta = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_preparacao_ceia", joinColumns = {
-			@JoinColumn(name = "FK_id_menu", referencedColumnName = "idMenu") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_id_menu", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_id_preparacao") })
 	@Cascade({ CascadeType.REPLICATE })
 	private List<Preparacao> ceia = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_preparacao_lanche_manha", joinColumns = {
-			@JoinColumn(name = "FK_id_menu", referencedColumnName = "idMenu") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_id_menu", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_id_preparacao") })
 	@Cascade({ CascadeType.REPLICATE })
 	private List<Preparacao> lanche_manha = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_preparacao_lanche_tarde", joinColumns = {
-			@JoinColumn(name = "FK_id_menu", referencedColumnName = "idMenu") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_id_menu", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_id_preparacao") })
 	@Cascade({ CascadeType.REPLICATE })
 	private List<Preparacao> lanche_tarde = new ArrayList<>();

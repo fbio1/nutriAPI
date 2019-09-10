@@ -10,10 +10,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "SalaDePreparacao")
+@Table(name = "sala_preparacao")
 public class SalaDePreparacao extends AbstractModel<Integer> {
 	@Id
-	@Column(name = "idSalaDePreparacao")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 

@@ -22,51 +22,51 @@ import org.hibernate.annotations.Cascade;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "MenusAplicados")
+@Table(name = "menu_aplicado")
 public class MenuAplicado extends AbstractModel<Integer> {
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idMenuAplicado")
 	private Integer id;
 
 	@ManyToMany
 	@JoinTable(name = "menu_aplicado_almoco", joinColumns = {
-			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "idMenuAplicado") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_idPreparacao") })
 	@Cascade({ org.hibernate.annotations.CascadeType.REPLICATE })
 	private List<Preparacao> almoco = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_aplicado_janta", joinColumns = {
-			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "idMenuAplicado") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_idPreparacao") })
 	@Cascade({ org.hibernate.annotations.CascadeType.REPLICATE })
 	private List<Preparacao> janta = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_aplicado_ceia", joinColumns = {
-			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "idMenuAplicado") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_idPreparacao") })
 	@Cascade({ org.hibernate.annotations.CascadeType.REPLICATE })
 	private List<Preparacao> ceia = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_aplicado_lanche_tarde", joinColumns = {
-			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "idMenuAplicado") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_idPreparacao") })
 	@Cascade({ org.hibernate.annotations.CascadeType.REPLICATE })
 	private List<Preparacao> lanche_tarde = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_aplicado_lanche_manha", joinColumns = {
-			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "idMenuAplicado") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_idPreparacao") })
 	@Cascade({ org.hibernate.annotations.CascadeType.REPLICATE })
 	private List<Preparacao> lanche_manha = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(name = "menu_aplicado_desjejum", joinColumns = {
-			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "idMenuAplicado") }, inverseJoinColumns = {
+			@JoinColumn(name = "FK_idMenuAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_idPreparacao") })
 	@Cascade({ org.hibernate.annotations.CascadeType.REPLICATE })
 	private List<Preparacao> desjejum = new ArrayList<>();

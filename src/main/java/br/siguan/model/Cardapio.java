@@ -21,11 +21,11 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@Entity(name = "Cardapios")
-@Table
+@Entity
+@Table(name = "cardapio")
 public class Cardapio extends AbstractModel<Integer> {
 	@Id
-    @Column(name = "idCardapio")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
@@ -37,7 +37,7 @@ public class Cardapio extends AbstractModel<Integer> {
     @JoinTable(name = "cardapio_usuario_autor",
             joinColumns = {
                 @JoinColumn(name = "FK_idCardapio",
-                        referencedColumnName = "idCardapio")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_idUsuario")})
     private Usuario autor;
@@ -46,7 +46,7 @@ public class Cardapio extends AbstractModel<Integer> {
     @JoinTable(name = "cardapio_usuario_responsavel",
             joinColumns = {
                 @JoinColumn(name = "FK_idCardapio",
-                        referencedColumnName = "idCardapio")},
+                        referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "FK_idUsuario")})
     private Usuario responsavel;

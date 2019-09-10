@@ -8,7 +8,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,37 +47,36 @@ public class UsuarioController {
 	
 	//@PreAuthorize("hasAnyRole('ADMINISTRADOR','BOLSISTA')")
 	@PostMapping
+	@Transactional
 	public ResponseEntity<Response<CadastroUsuarioDTO>> cadastrarCliente(
 			@Valid @RequestBody CadastroUsuarioDTO usuarioDto, BindingResult result) throws NoSuchAlgorithmException {
 
 		Response<CadastroUsuarioDTO> response = new Response<CadastroUsuarioDTO>();
 
-		//validarDadosExistentes(usuarioDto, result);
+		validarDadosExistentes(usuarioDto, result);
 
 		Usuario user = this.converterDtoParaUsuario(usuarioDto);
 
 		Login login = this.converterDtoParaLogin(usuarioDto, result);
 
 		if (result.hasErrors()) {
+			result.getAllErrors().forEach(error -> response.getErros().add(error.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(response);
 		}
-
-//		this.usuarioRepository.save(user);
+		
 		login.setUsuario(user);
+		//Cascata salva usuário e o login
 		this.loginRepository.save(login);
 		response.setData(this.converterCadastroDTO(login));
 		
 		return ResponseEntity.ok(response);
 	}
 	
-//	private void validarDadosExistentes(CadastroUsuarioDTO usuarioDTO, BindingResult result) {
-//
-//		Login login = this.loginRepository.findByloginAndAtivoTrue(usuarioDTO.getLogin());
-//		
-//	}
+	private void validarDadosExistentes(CadastroUsuarioDTO usuarioDTO, BindingResult result) {
+		this.loginRepository.findByloginAndAtivoTrue(usuarioDTO.getLogin()).ifPresent(login -> result.addError(new ObjectError("login", "Login já existente!")));
+	}
 	
 	private Usuario converterDtoParaUsuario(CadastroUsuarioDTO usuarioDTO) {
-
 		Usuario user = new Usuario();
 		user.setEmail(usuarioDTO.getEmail());
 		user.setNome(usuarioDTO.getNome());
@@ -87,7 +88,6 @@ public class UsuarioController {
 
 	private Login converterDtoParaLogin(CadastroUsuarioDTO usuarioDTO, BindingResult result)
 			throws NoSuchAlgorithmException {
-
 		Login login = new Login();
 		login.setLogin(usuarioDTO.getLogin());
 		login.setSenha(PasswordUtils.gerarBCrypt(usuarioDTO.getSenha()));
@@ -96,7 +96,6 @@ public class UsuarioController {
 	
 	private CadastroUsuarioDTO converterCadastroDTO(Login credencial) {
 		CadastroUsuarioDTO usuarioDTO = new CadastroUsuarioDTO();
-
 		usuarioDTO.setId(credencial.getId());
 		usuarioDTO.setLogin(credencial.getLogin());
 		usuarioDTO.setNome(credencial.getUsuario().getNome());
@@ -108,9 +107,8 @@ public class UsuarioController {
 
 	@GetMapping(value = "{id}")
 	public ResponseEntity<Response<Usuario>> buscarClientePorId(@PathVariable("id") Integer id) {
-
 		Response<Usuario> response = new Response<Usuario>();
-
+		
 		Optional<Usuario> usuario = this.usuarioRepository.findById(id);
 
 		if (!usuario.isPresent()) {
@@ -152,8 +150,8 @@ public class UsuarioController {
 //	}
 
 	@DeleteMapping(value = "{id}")
+	@Transactional
 	public ResponseEntity<Response<Usuario>> deletarCliente(@PathVariable("id") Integer id) {
-
 		Response<Usuario> response = new Response<Usuario>();
 
 		Optional<Usuario> usuario = this.usuarioRepository.findById(id);
@@ -169,14 +167,7 @@ public class UsuarioController {
 
 		return ResponseEntity.ok(response);
 	}
-	
-//	private void validarDadosExistentes(Usuario usuario, BindingResult result) {
-//
-//		this.usuarioRepository.findByUsernameAndAtivoTrue(usuario.getUsername())
-//				.ifPresent(cre -> result.addError(new ObjectError("usuario", "Username já existente")));
-//
-//	}
-//	
+		
 //	private void atualizarDadosCliente(Usuario oldUsuario, Usuario newUsuario, BindingResult result)
 //			throws NoSuchAlgorithmException {
 //

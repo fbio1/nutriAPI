@@ -1,7 +1,6 @@
 package br.siguan.model;
 
 public class DadoRelatorioCardapioSemanal {
-
 	private String nomePreparacao;
 
 	public DadoRelatorioCardapioSemanal() {

@@ -16,11 +16,11 @@ import javax.validation.constraints.NotNull;
 import br.siguan.model.enuns.TipoInsumo;
 import br.siguan.model.enuns.UnidadeBase;
 
-@Entity(name = "insumos")
-@Table
+@Entity
+@Table(name = "insumo")
 public class Insumo extends AbstractModel<Integer> {
 	@Id
-	@Column(name = "idInsumo")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 

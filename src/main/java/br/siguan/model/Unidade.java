@@ -14,10 +14,10 @@ import javax.validation.constraints.NotNull;
 import br.siguan.model.enuns.UnidadeBase;
 
 @Entity
-@Table(name = "Unidades")
+@Table(name = "unidade")
 public class Unidade extends AbstractModel<Integer> {
 	@Id
-    @Column(name = "idUnidade")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

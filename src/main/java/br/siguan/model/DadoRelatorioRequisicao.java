@@ -1,7 +1,6 @@
 package br.siguan.model;
 
 public class DadoRelatorioRequisicao {
-    
     private String nomeInsumo;
     private String tipoinsumo;    
     private String nomeUnidade;    

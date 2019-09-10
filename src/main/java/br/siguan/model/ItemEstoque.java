@@ -16,11 +16,11 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name = "itensEstoques")
-@Table
+@Entity
+@Table(name = "item_estoque")
 public class ItemEstoque extends AbstractModel<Integer> {
 	@Id
-    @Column(name = "idItemEstoque")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

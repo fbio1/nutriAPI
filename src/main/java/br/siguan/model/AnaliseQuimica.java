@@ -7,11 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "analiseQuimica")
-@Table
+@Entity
+@Table(name = "analise_quimica")
 public class AnaliseQuimica extends AbstractModel<Integer> {
 	@Id
-	@Column(name = "idAnaliseQuimica")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
