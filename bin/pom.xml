@@ -8,11 +8,11 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.nutri</groupId>
-	<artifactId>Nutri</artifactId>
+	<groupId>br.siguan</groupId>
+	<artifactId>SIGUAN</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>NutriManager</name>
-	<description>NutriManager</description>
+	<name>SIGUAN</name>
+	<description>SISTEMA INTEGRADO DE GERENCIAMENTO EM UNIDADES DE ALIMENTAÇÃO</description>
 
 	<properties>
 		<java.version>1.8</java.version>
