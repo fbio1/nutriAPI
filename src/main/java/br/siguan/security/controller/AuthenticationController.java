@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.siguan.helper.Response;
 import br.siguan.model.Login;
 import br.siguan.repository.LoginRepository;
 import br.siguan.security.dto.JwtAuthenticationDto;
 import br.siguan.security.dto.TokenDto;
 import br.siguan.security.utils.JwtTokenUtil;
+import br.siguan.utils.Response;
 
 @RestController
 @RequestMapping("/login")

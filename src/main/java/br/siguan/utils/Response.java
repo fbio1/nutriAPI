@@ -1,4 +1,4 @@
-package br.siguan.helper;
+package br.siguan.utils;
 
 import java.util.ArrayList;
 import java.util.List;

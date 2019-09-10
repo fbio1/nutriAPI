@@ -38,7 +38,7 @@ public class Usuario extends AbstractModel<Integer> {
     @Column(name = "email", nullable = false)
     @Email(message = "O campo email é inválido.")
     @NotNull(message = "Por favor, informe o email do usuário!")
-    String email;
+    private String email;
 
     public Usuario() {
     }

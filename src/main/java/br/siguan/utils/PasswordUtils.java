@@ -1,4 +1,4 @@
-package br.siguan.helper;
+package br.siguan.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

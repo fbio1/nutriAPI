@@ -1,11 +1,12 @@
 package br.siguan.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,12 +19,24 @@ public abstract class AbstractModel<PK extends Serializable> {
 	public abstract void setId(PK id);
 
 	/**
-	 * Atributo de controle para exclusão lógica
-	 * TRUE  = ativo
-	 * FALSE = inativo
+	 * Atributo de controle para exclusão lógica TRUE = ativo FALSE = inativo
 	 */
 	@Column
 	private Boolean ativo = true;
+
+	@Version
+	@Column(name = "version")
+	private Integer version;
+
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at")
+	private Date createdAt;
+
+	@LastModifiedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_at")
+	private Date updatedAt;
 
 	@Override
 	public int hashCode() {
@@ -69,4 +82,27 @@ public abstract class AbstractModel<PK extends Serializable> {
 		return ativo;
 	}
 
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 }

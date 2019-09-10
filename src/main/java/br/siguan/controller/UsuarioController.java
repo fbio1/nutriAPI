@@ -16,17 +16,18 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.siguan.helper.PasswordUtils;
-import br.siguan.helper.Response;
 import br.siguan.model.Login;
 import br.siguan.model.Usuario;
 import br.siguan.model.dto.CadastroUsuarioDTO;
 import br.siguan.repository.LoginRepository;
 import br.siguan.repository.UsuarioRepository;
+import br.siguan.utils.PasswordUtils;
+import br.siguan.utils.Response;
 
 @RestController
 @RequestMapping(value = "/usuario")
@@ -94,14 +95,14 @@ public class UsuarioController {
 		return login;
 	}
 	
-	private CadastroUsuarioDTO converterCadastroDTO(Login credencial) {
+	private CadastroUsuarioDTO converterCadastroDTO(Login login) {
 		CadastroUsuarioDTO usuarioDTO = new CadastroUsuarioDTO();
-		usuarioDTO.setId(credencial.getId());
-		usuarioDTO.setLogin(credencial.getLogin());
-		usuarioDTO.setNome(credencial.getUsuario().getNome());
-		usuarioDTO.setEmail(credencial.getUsuario().getEmail());
-		usuarioDTO.setTipo(credencial.getUsuario().getTipo());
-		usuarioDTO.setImagem(credencial.getUsuario().getImagem());
+		usuarioDTO.setId(login.getId());
+		usuarioDTO.setLogin(login.getLogin());
+		usuarioDTO.setNome(login.getUsuario().getNome());
+		usuarioDTO.setEmail(login.getUsuario().getEmail());
+		usuarioDTO.setTipo(login.getUsuario().getTipo());
+		usuarioDTO.setImagem(login.getUsuario().getImagem());
 		return usuarioDTO;
 	}
 
@@ -121,33 +122,59 @@ public class UsuarioController {
 		return ResponseEntity.ok(response);
 	}
 
-//	@PutMapping(value = "{id}")
-//	public ResponseEntity<Response<Usuario>> atualizarCliente(@PathVariable("id") Integer id,
-//			@Valid @RequestBody Usuario usuario, BindingResult result) throws NoSuchAlgorithmException {
-//
-//		Response<Usuario> response = new Response<Usuario>();
-//
-//		Optional<Usuario> oldUsuario = this.usuarioRepository.findById(id);
-//
-//		if (!oldUsuario.isPresent()) {			
-//			result.addError(new ObjectError("usuario", "Usuario não encontrado."));
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//
-//		this.atualizarDadosCliente(oldUsuario.get(), usuario, result);
-//
-//		if (result.hasErrors()) {			
-//			result.getAllErrors().forEach(error -> response.getErros().add(error.getDefaultMessage()));
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//
-//		this.usuarioRepository.save(oldUsuario.get());
-//		
-//		response.setData(oldUsuario.get());
-//
-//		return ResponseEntity.ok(response);
-//
-//	}
+	@PutMapping(value = "{id}")
+	public ResponseEntity<Response<CadastroUsuarioDTO>> atualizarCliente(@PathVariable("id") Integer id,
+			@Valid @RequestBody CadastroUsuarioDTO usuarioDTO, BindingResult result) throws NoSuchAlgorithmException {
+
+		Response<CadastroUsuarioDTO> response = new Response<CadastroUsuarioDTO>();
+
+		Optional<Login> login = this.loginRepository.findById(id);
+
+		if (!login.isPresent()) {
+			result.addError(new ObjectError("login", "Login não encontrado!"));
+		}
+
+		this.atualizarDados(login.get(), usuarioDTO, result);
+
+		if (result.hasErrors()) {
+			result.getAllErrors().forEach(error -> response.getErros().add(error.getDefaultMessage()));
+			return ResponseEntity.badRequest().body(response);
+		}
+
+		this.loginRepository.save(login.get());
+		response.setData(this.converterCadastroDTO(login.get()));
+
+		return ResponseEntity.ok(response);
+	}
+	
+	private void atualizarDados(Login login, CadastroUsuarioDTO usuarioDTO, BindingResult result)
+			throws NoSuchAlgorithmException {
+
+		login.getUsuario().setNome(usuarioDTO.getNome());
+
+		if (!login.getUsuario().getEmail().equals(usuarioDTO.getEmail())) {
+
+			this.usuarioRepository.findByEmailAndAtivoTrue(usuarioDTO.getEmail())
+					.ifPresent(clien -> result.addError(new ObjectError("email", "Email já exitente.")));
+			login.getUsuario().setEmail(usuarioDTO.getEmail());
+		}
+		
+		if (usuarioDTO.getLogin() != null || usuarioDTO.getSenha() != null) {
+
+			if (!login.getLogin().equals(usuarioDTO.getLogin())) {
+				this.loginRepository.findByloginAndAtivoTrue(usuarioDTO.getLogin())
+						.ifPresent(lo -> result.addError(new ObjectError("username", "Username já existente.")));
+				login.setLogin(usuarioDTO.getLogin());
+			}
+
+			login.setSenha(PasswordUtils.gerarBCrypt(usuarioDTO.getSenha()));
+
+		} else {
+			login.setLogin(login.getLogin());
+			login.setSenha(login.getSenha());
+
+		}
+	}
 
 	@DeleteMapping(value = "{id}")
 	@Transactional
@@ -167,31 +194,4 @@ public class UsuarioController {
 
 		return ResponseEntity.ok(response);
 	}
-		
-//	private void atualizarDadosCliente(Usuario oldUsuario, Usuario newUsuario, BindingResult result)
-//			throws NoSuchAlgorithmException {
-//
-//		if (!oldUsuario.getEmail().equals(newUsuario.getEmail())) {
-//
-//			this.usuarioRepository.findByEmailAndAtivoTrue(newUsuario.getEmail())
-//					.ifPresent(clien -> result.addError(new ObjectError("email", "Email já exitente.")));
-//			oldUsuario.setEmail(newUsuario.getEmail());
-//		}			
-//
-//		if (newUsuario.getUsername() != null || newUsuario.getSenha() != null) {
-//
-//			if (!oldUsuario.getUsername().equals(newUsuario.getUsername())) {
-//
-//				this.usuarioRepository.findByUsernameAndAtivoTrue(newUsuario.getUsername())
-//						.ifPresent(clien -> result.addError(new ObjectError("username", "Username já exitente.")));
-//				oldUsuario.setUsername(newUsuario.getUsername());
-//			}	
-//
-//			oldUsuario.setSenha(PasswordUtils.gerarBCrypt(newUsuario.getSenha()));
-//
-//		} else {
-//			oldUsuario.setUsername(oldUsuario.getUsername());
-//			oldUsuario.setSenha(oldUsuario.getSenha());
-//		}
-//	}
 }

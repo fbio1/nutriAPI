@@ -6,11 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import br.siguan.helper.PasswordUtils;
 import br.siguan.model.Login;
 import br.siguan.model.Usuario;
 import br.siguan.model.enuns.TipoUsuario;
 import br.siguan.repository.LoginRepository;
+import br.siguan.utils.PasswordUtils;
 
 @SpringBootApplication
 public class SiguanApplication {
