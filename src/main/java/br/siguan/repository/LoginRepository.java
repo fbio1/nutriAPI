@@ -1,9 +1,11 @@
 package br.siguan.repository;
 
+import java.util.Optional;
+
 import br.siguan.model.Login;
 
 public interface LoginRepository extends GenericRepository<Login, Integer> {
 
-	Login findByloginAndAtivoTrue(String Login);
+	Optional<Login> findByloginAndAtivoTrue(String Login);
 
 }

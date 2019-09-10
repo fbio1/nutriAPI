@@ -6,9 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.siguan.helper.PasswordUtils;
+import br.siguan.model.Login;
 import br.siguan.model.Usuario;
 import br.siguan.model.enuns.TipoUsuario;
-import br.siguan.repository.UsuarioRepository;
+import br.siguan.repository.LoginRepository;
 
 @SpringBootApplication
 public class SiguanApplication {
@@ -17,8 +19,11 @@ public class SiguanApplication {
 		SpringApplication.run(SiguanApplication.class, args);
 	}
 	
+//	@Autowired
+//	private UsuarioRepository usuarioRepository;
+	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private LoginRepository loginRepository;
 	
 	@Bean
 	public CommandLineRunner commandLineRunner() {
@@ -27,9 +32,12 @@ public class SiguanApplication {
 			usuario.setNome("nome");
 			usuario.setEmail("email@gmail.com");
 			usuario.setTipo(TipoUsuario.NUTRICIONISTA);
-			usuario.setImagem("imagem");
-			//usuario.setSenha(PasswordUtils.gerarBCrypt("teste"));
-			usuarioRepository.save(usuario);
+			usuario.setImagem("imagem");		
+			Login login = new Login();
+			login.setLogin("teste");
+			login.setSenha(PasswordUtils.gerarBCrypt("teste"));
+			login.setUsuario(usuario);
+			loginRepository.save(login);
 		};
 	}
 

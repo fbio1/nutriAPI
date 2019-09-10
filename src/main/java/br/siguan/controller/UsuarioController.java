@@ -90,8 +90,7 @@ public class UsuarioController {
 
 		Login login = new Login();
 		login.setLogin(usuarioDTO.getLogin());
-		login.setSenha(usuarioDTO.getSenha());
-//		login.setSenha(PasswordUtils.gerarBCrypt(usuarioDTO.getSenha()));
+		login.setSenha(PasswordUtils.gerarBCrypt(usuarioDTO.getSenha()));
 		return login;
 	}
 	
