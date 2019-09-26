@@ -6,6 +6,6 @@ import br.nutri.model.Login;
 
 public interface LoginRepository extends GenericRepository<Login, Integer> {
 
-	Optional<Login> findByloginAndAtivoTrue(String Login);
+	Optional<Login> findByloginAndActiveIsTrue(String Login);
 
 }

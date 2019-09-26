@@ -76,7 +76,7 @@ public class AuthenticationController {
 
 		String token = jwtTokenUtil.obterToken(userDetails);
 
-		Optional<Login> login = this.loginRepository.findByloginAndAtivoTrue(authenticationDto.getLogin());
+		Optional<Login> login = this.loginRepository.findByloginAndActiveIsTrue(authenticationDto.getLogin());
 
 		r.addHeader(TOKEN_HEADER, BEARER_PREFIX + " " + token);
 		r.addHeader("Usuario", "ID:" + login.get().getUsuario().getId());

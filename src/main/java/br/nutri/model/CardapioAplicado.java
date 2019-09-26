@@ -21,7 +21,7 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "cardapio_aplicado")
-public class CardapioAplicado extends AbstractModel<Integer> {
+public class CardapioAplicado extends GenericAbstractModel<Integer> {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class CardapioAplicado extends AbstractModel<Integer> {
 	private String nome;
 
 	@OneToMany
-	@JoinTable(name = "cadapios_aplicados_menus_aplicados", joinColumns = {
+	@JoinTable(name = "cardapio_aplicado_menu_aplicado", joinColumns = {
 			@JoinColumn(name = "FK_cardapioAplicado", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "FK_menuAplicado") })
 	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.REFRESH })

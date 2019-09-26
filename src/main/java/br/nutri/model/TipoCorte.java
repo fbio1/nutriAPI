@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tipo_corte")
-public class TipoCorte extends AbstractModel<Integer> {
+public class TipoCorte implements Model {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,9 @@ public class TipoCorte extends AbstractModel<Integer> {
 
 	@Column(name = "observacao", nullable = true, length = 500) // pode ser nulo
 	private String observacao;
+
+	@Column(name = "active")
+	private Boolean active;
 
 	public TipoCorte() {
 	}
@@ -66,5 +69,14 @@ public class TipoCorte extends AbstractModel<Integer> {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	@Override
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }

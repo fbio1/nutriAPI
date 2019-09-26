@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "analise_quimica")
-public class AnaliseQuimica extends AbstractModel<Integer> {
+public class AnaliseQuimica extends GenericAbstractModel<Integer> {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

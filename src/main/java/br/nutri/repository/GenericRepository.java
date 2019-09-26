@@ -11,17 +11,17 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import br.nutri.model.AbstractModel;
+import br.nutri.model.GenericAbstractModel;
 
 @NoRepositoryBean
-public interface GenericRepository<T extends AbstractModel<PK>, PK extends Serializable> extends JpaRepository<T, PK> {
+public interface GenericRepository<T extends GenericAbstractModel<PK>, PK extends Serializable> extends JpaRepository<T, PK> {
 	/**
 	 * Buscar todos ativos
 	 * 
 	 * @return objects
 	 */
 	@Override
-	@Query(value = "select * from #{#entityName} where ativo = true", nativeQuery = true)
+	@Query(value = "select * from #{#entityName} where active = true", nativeQuery = true)
 	List<T> findAll();
 
 	/**
@@ -31,7 +31,7 @@ public interface GenericRepository<T extends AbstractModel<PK>, PK extends Seria
 	 * @return object
 	 */
 	@Override
-	@Query(value = "select * from #{#entityName} where id = ?1 and ativo = true", nativeQuery = true)
+	@Query(value = "select * from #{#entityName} where id = ?1 and active = true", nativeQuery = true)
 	Optional<T> findById(PK arg0);
 
 	/**
@@ -48,7 +48,7 @@ public interface GenericRepository<T extends AbstractModel<PK>, PK extends Seria
 	@Override
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE #{#entityName} SET ativo=false where id = ?1", nativeQuery = true)
+	@Query(value = "UPDATE #{#entityName} SET active=false where id = ?1", nativeQuery = true)
 	void deleteById(PK arg0);
 
 	@Override

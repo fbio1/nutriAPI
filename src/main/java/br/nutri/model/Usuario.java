@@ -16,7 +16,7 @@ import br.nutri.model.enuns.TipoUsuario;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario extends AbstractModel<Integer> {
+public class Usuario extends GenericAbstractModel<Integer> {
 	@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

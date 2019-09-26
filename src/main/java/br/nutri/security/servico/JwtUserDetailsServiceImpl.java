@@ -20,7 +20,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Login> login = this.loginRepository.findByloginAndAtivoTrue(username);
+		Optional<Login> login = this.loginRepository.findByloginAndActiveIsTrue(username);
 
 		if (login.isPresent()) {
 			return JwtUserFactory.create(login.get());

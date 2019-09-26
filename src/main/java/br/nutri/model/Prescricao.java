@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "prescricao")
-public class Prescricao extends AbstractModel<Integer> {
+public class Prescricao extends GenericAbstractModel<Integer> {
 	@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

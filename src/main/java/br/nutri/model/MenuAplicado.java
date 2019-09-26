@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "menu_aplicado")
-public class MenuAplicado extends AbstractModel<Integer> {
+public class MenuAplicado extends GenericAbstractModel<Integer> {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,7 +14,7 @@ import org.hibernate.annotations.Cascade;
 
 @Entity(name = "login")
 @Table
-public class Login extends AbstractModel<Integer> {
+public class Login extends GenericAbstractModel<Integer> {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

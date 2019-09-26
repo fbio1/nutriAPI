@@ -74,7 +74,7 @@ public class UsuarioController {
 	}
 	
 	private void validarDadosExistentes(CadastroUsuarioDTO usuarioDTO, BindingResult result) {
-		this.loginRepository.findByloginAndAtivoTrue(usuarioDTO.getLogin()).ifPresent(login -> result.addError(new ObjectError("login", "Login já existente!")));
+		this.loginRepository.findByloginAndActiveIsTrue(usuarioDTO.getLogin()).ifPresent(login -> result.addError(new ObjectError("login", "Login já existente!")));
 	}
 	
 	private Usuario converterDtoParaUsuario(CadastroUsuarioDTO usuarioDTO) {
@@ -154,7 +154,7 @@ public class UsuarioController {
 
 		if (!login.getUsuario().getEmail().equals(usuarioDTO.getEmail())) {
 
-			this.usuarioRepository.findByEmailAndAtivoTrue(usuarioDTO.getEmail())
+			this.usuarioRepository.findByEmailAndActiveIsTrue(usuarioDTO.getEmail())
 					.ifPresent(clien -> result.addError(new ObjectError("email", "Email já exitente.")));
 			login.getUsuario().setEmail(usuarioDTO.getEmail());
 		}
@@ -162,7 +162,7 @@ public class UsuarioController {
 		if (usuarioDTO.getLogin() != null || usuarioDTO.getSenha() != null) {
 
 			if (!login.getLogin().equals(usuarioDTO.getLogin())) {
-				this.loginRepository.findByloginAndAtivoTrue(usuarioDTO.getLogin())
+				this.loginRepository.findByloginAndActiveIsTrue(usuarioDTO.getLogin())
 						.ifPresent(lo -> result.addError(new ObjectError("username", "Username já existente.")));
 				login.setLogin(usuarioDTO.getLogin());
 			}

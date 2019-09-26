@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AbstractModel<PK extends Serializable> {
+public abstract class GenericAbstractModel<PK extends Serializable> implements Model {
 	public abstract PK getId();
 
 	public abstract void setId(PK id);
@@ -22,7 +22,7 @@ public abstract class AbstractModel<PK extends Serializable> {
 	 * Atributo de controle para exclusão lógica TRUE = ativo FALSE = inativo
 	 */
 	@Column
-	private Boolean ativo = true;
+	private Boolean active = true;
 
 	@Version
 	@Column(name = "version")
@@ -57,7 +57,7 @@ public abstract class AbstractModel<PK extends Serializable> {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		AbstractModel<?> other = (AbstractModel<?>) obj;
+		GenericAbstractModel<?> other = (GenericAbstractModel<?>) obj;
 		if (getId() == null) {
 			if (other.getId() != null) {
 				return false;
@@ -69,17 +69,18 @@ public abstract class AbstractModel<PK extends Serializable> {
 	}
 
 	@JsonIgnore
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public Boolean isActive() {
+		return active;
 	}
 
 	@JsonIgnore
-	public Boolean isAtivo() {
-		return ativo;
+	public Boolean getActive() {
+		return active;
+	}
+
+	@Override
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public Integer getVersion() {

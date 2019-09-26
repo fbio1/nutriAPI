@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,16 +51,16 @@ public abstract class GenericRestController<T, ID> {
 		return body;
 	}
 
-//	@PatchMapping("/{id}")
-//	@ApiOperation(value = "Atualiza o item com o id especificado")
-//	public T update(@PathVariable("id") ID id, @RequestBody T body) {
-//		T entity = getRepository().findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-//
-//		BeanUtils.copyProperties(body, entity,
-//				PropertyUtils.getNullPropertyNames(body, ignoredProps.toArray(String[]::new)));
-//
-//		getRepository().saveAndFlush(entity);
-//
-//		return entity;
-//	}
+	@PatchMapping("/{id}")
+	@ApiOperation(value = "Atualiza o item com o id especificado")
+	public T update(@PathVariable("id") ID id, @RequestBody T body) {
+		T entity = getRepository().findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+		BeanUtils.copyProperties(body, entity,
+				PropertyUtils.getNullPropertyNames(body, ignoredProps.toArray(String[]::new)));
+
+		getRepository().saveAndFlush(entity);
+
+		return entity;
+	}
 }

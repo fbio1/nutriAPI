@@ -19,7 +19,7 @@ import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "menu")
-public class Menu extends AbstractModel<Integer> {
+public class Menu extends GenericAbstractModel<Integer> {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

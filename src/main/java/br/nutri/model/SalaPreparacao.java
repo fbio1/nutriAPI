@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "sala_preparacao")
-public class SalaDePreparacao extends AbstractModel<Integer> {
+public class SalaPreparacao extends GenericAbstractModel<Integer> {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +29,10 @@ public class SalaDePreparacao extends AbstractModel<Integer> {
 	@NotNull(message = "Informe a quantidade de funcionários.")
 	private int numFuncionarios;
 
-	public SalaDePreparacao() {
+	public SalaPreparacao() {
 	}
 
-	public SalaDePreparacao(String nome, String descricao, int numFuncionarios) {
+	public SalaPreparacao(String nome, String descricao, int numFuncionarios) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.numFuncionarios = numFuncionarios;

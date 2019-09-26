@@ -13,10 +13,10 @@ import br.nutri.repository.LoginRepository;
 import br.nutri.utils.PasswordUtils;
 
 @SpringBootApplication
-public class SiguanApplication {
+public class NutriApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SiguanApplication.class, args);
+		SpringApplication.run(NutriApplication.class, args);
 	}
 	
 //	@Autowired

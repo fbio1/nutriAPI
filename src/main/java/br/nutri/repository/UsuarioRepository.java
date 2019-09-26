@@ -8,6 +8,6 @@ public interface UsuarioRepository extends GenericRepository<Usuario, Integer> {
 	
 //	Optional<Usuario> findByUsernameAndAtivoTrue(String username);
 //	
-	Optional<Usuario> findByEmailAndAtivoTrue(String email);
+	Optional<Usuario> findByEmailAndActiveIsTrue(String email);
 
 }

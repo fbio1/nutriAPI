@@ -15,7 +15,7 @@ import br.nutri.model.enuns.UnidadeBase;
 
 @Entity
 @Table(name = "unidade")
-public class Unidade extends AbstractModel<Integer> {
+public class Unidade extends GenericAbstractModel<Integer> {
 	@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

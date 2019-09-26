@@ -23,7 +23,7 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "cardapio")
-public class Cardapio extends AbstractModel<Integer> {
+public class Cardapio extends GenericAbstractModel<Integer> {
 	@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

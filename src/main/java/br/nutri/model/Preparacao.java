@@ -34,7 +34,7 @@ import br.nutri.model.enuns.TipoTextura;
 
 @Entity
 @Table(name = "preparacao")
-public class Preparacao extends AbstractModel<Integer> {
+public class Preparacao extends GenericAbstractModel<Integer> {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,7 +90,7 @@ public class Preparacao extends AbstractModel<Integer> {
 	@Fetch(FetchMode.JOIN)
 	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "idSalaDePreparacao")
-	private SalaDePreparacao localPreparo;
+	private SalaPreparacao localPreparo;
 
 	@ManyToMany(cascade = javax.persistence.CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@Fetch(FetchMode.SUBSELECT)
@@ -105,7 +105,7 @@ public class Preparacao extends AbstractModel<Integer> {
 
 	public Preparacao(String nome, CorPredominante corPredominante, TipoTextura textura, GrupoAlimentos grupo,
 			boolean vegetariano, String modoDePreparo, Enxofre enxofre, TecnicasCoccao tecnicasCoccao,
-			AspectoGorduroso aspectoGorduroso, Sodio sodio, SalaDePreparacao localPreparo,
+			AspectoGorduroso aspectoGorduroso, Sodio sodio, SalaPreparacao localPreparo,
 			List<InsumoPerCapita> listaIngredientes) {
 		this.nome = nome;
 		this.corPredominante = corPredominante;
@@ -193,11 +193,11 @@ public class Preparacao extends AbstractModel<Integer> {
 		this.modoDePreparo = modoDePreparo;
 	}
 
-	public SalaDePreparacao getLocalPreparo() {
+	public SalaPreparacao getLocalPreparo() {
 		return localPreparo;
 	}
 
-	public void setLocalPreparo(SalaDePreparacao localPreparo) {
+	public void setLocalPreparo(SalaPreparacao localPreparo) {
 		this.localPreparo = localPreparo;
 	}
 
