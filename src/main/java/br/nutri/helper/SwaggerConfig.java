@@ -23,7 +23,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("SIGUAN")
+		return new ApiInfoBuilder().title("NutriAPI")
 				.description("Documentação da API de acesso aos endpoints do sistema.").version("1.0").build();
 	}
 
