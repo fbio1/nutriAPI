@@ -1,8 +1,8 @@
 # NutriAPI
 
-O projeto tem como objetivo o desenvolvimento de recursos que serviram para o gerenciamento de um restaurante. 
+O projeto tem como objetivo o desenvolvimento de recursos que serve para o gerenciamento de um restaurante. 
 
-Inicialmente a ideia é para restaurante universitários.
+Inicialmente a ideia é para restaurante universitários, porém com ideia de expansão para outros ramos.
 
 ### Configurações necessárias
 * Qualquer IDE voltada para desenvolvimento Java (Eclipse, Intellij ou VSCode)
